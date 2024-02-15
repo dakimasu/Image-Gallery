@@ -13,6 +13,8 @@ const account_id = process.env.ACCOUNT_ID;
 const apiUrlV1 = `https://api.cloudflare.com/client/v4/accounts/${account_id}/images/v1`;
 const apiUrlV2 = `https://api.cloudflare.com/client/v4/accounts/${account_id}/images/v2`;
 
+const allowedImageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg'];
+
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -32,7 +34,7 @@ function generateRegular() {
 
     fs.readdir(imageFolderPath, (_, files) => {
 
-        const imageFiles = files.filter(file => /\.(jpg|jpeg|png|gif)$/i.test(file));
+        const imageFiles = files.filter(file => allowedImageExtensions.includes(path.extname(file).toLowerCase()));
 
         const htmlContent = generateHtmlContent(imageFiles);
 
@@ -57,7 +59,7 @@ function generateRegular() {
     </head>
     <body>
         <div id="gallery">
-    ${imageFiles.map((file, index) => `        <img src="/images/${file}" alt="${file}">`).join('\n')}
+${imageFiles.map((file, index) => `         <img src="/images/${file}" alt="${file}">`).join('\n')}
         </div>
         <script src="click.js"></script>
     </body>
@@ -68,23 +70,30 @@ function generateRegular() {
 
 async function generateCloudflare() {
     fs.readdir(imageFolderPath, (_, files) => {
-  
-      if (Array.isArray(files)) {
-        files.forEach((file) => {
-          const imagePath = path.join(imageFolderPath, file);
-  
-          const formData = new FormData();
-          formData.append('file', fs.createReadStream(imagePath));
-  
-          axios.post(apiUrlV1, formData, {
-            headers: {
-              'Authorization': `Bearer ${api_token}`,
-              ...formData.getHeaders(),
-            },
-          })
-        });
-      }
-    });
+        if (Array.isArray(files)) {
+          files.forEach((file) => {
+            const imagePath = path.join(imageFolderPath, file);
+            const fileExtension = path.extname(file).toLowerCase();
+      
+            // Check if the file has an allowed image extension
+            if (allowedImageExtensions.includes(fileExtension)) {
+              const formData = new FormData();
+              formData.append('file', fs.createReadStream(imagePath));
+      
+              axios.post(apiUrlV1, formData, {
+                headers: {
+                  'Authorization': `Bearer ${api_token}`,
+                  ...formData.getHeaders(),
+                },
+              }).catch(error => {
+                console.error('Error in Cloudflare Images API request:', error.message);
+              });
+            } else {
+              console.error(`Skipping non-image file: ${imagePath}`);
+            }
+          });
+        }
+      });
   
     await new Promise(resolve => setTimeout(resolve, 2000));
   

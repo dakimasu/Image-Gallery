@@ -4,11 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
     images.forEach((image) => {
         image.addEventListener('click', function () {
 
-            const imageName = image.getAttribute('src').split('/').pop();
-
-            const currentURL = window.location.href.replace(/\/index\.html$/, '');
-
-            const newURL = currentURL + '/images/' + imageName;
+            const newURL = image.getAttribute('src');
 
             window.location.href = newURL;
         });
