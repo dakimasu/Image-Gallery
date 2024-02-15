@@ -19,7 +19,7 @@ Make sure you have Node.js installed on your machine.
 1. Clone the repository to your local machine.
 
 ```
-git clone https://github.com/SadAways/Image-Gallery.git
+git clone -b "1.0" https://github.com/SadAways/Image-Gallery.git
 ```
 
 2. Navigate to the project folder.
