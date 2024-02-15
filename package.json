@@ -6,9 +6,9 @@
     "type": "git",
     "url": "https://github.com/SadAways/Image-Gallery.git"
   },
-  "main": "/javascript/generateHTML.js",
+  "main": "generateHTML.js",
   "scripts": {
-    "generate-html": "node /javascript/generateHTML.js"
+    "generate-html": "node generateHTML.js"
   },
   "keywords": [],
   "author": "SadAways",
