@@ -22,7 +22,7 @@ Make sure you have Node.js installed on your machine.
 git clone https://github.com/SadAways/Image-Gallery.git
 ```
 
-2. Navigate to the project directory.
+2. Navigate to the project folder.
 
 ```
 cd Image-Gallery
@@ -36,7 +36,7 @@ npm install
 
 ### Usage
 
-4. Copy your images to the `/images/` directory.
+4. Copy your images to the `/images/` folder.
 
 5. Generate the HTML file by running the following command.
 
@@ -44,6 +44,6 @@ npm install
 npm start
 ```
 
-6. Copy these files: (`index.html`, `style.css`, `click.js` and the `/images/` directory) to an empty directory on your website.
+6. Copy these files: (`index.html`, `style.css`, `click.js` and the `/images/` folder) to an empty folder on your website. Delete `.gitignore` in the `/images/` folder if you manage your website with git.
 
-7. Upload the contents to your website, and navigate to `yourwebsite.com/emptydirectory/index.html` to view your images.
+8. Upload the contents to your website, and navigate to `yourwebsite.com/emptyfolder/index.html` to view your images.
