@@ -41,7 +41,7 @@ npm install
 5. Generate the HTML file by running the following command.
 
 ```
-npm run generate-html
+npm start
 ```
 
 6. Copy these files: (`index.html`, `style.css`, `click.js` and the `/images/` directory) to an empty directory on your website.
