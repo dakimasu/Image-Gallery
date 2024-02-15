@@ -1,0 +1,29 @@
+body, html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f5f5f5;
+}
+
+#gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 10px;
+    width: 100%;
+    margin: 0 auto;
+    height: 100vh; /* Set the container to take up the full viewport height */
+    overflow-y: auto; /* Enable vertical scrolling if needed */
+}
+
+img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
