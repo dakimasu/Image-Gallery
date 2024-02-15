@@ -1,7 +1,7 @@
 {
   "name": "image-gallery",
   "version": "1.0.0",
-  "description": "A simple static, html and css, image gallery!",
+  "description": "A simple static, html and css, image gallery! Held together by duck tape and glue!",
   "repository": {
     "type": "git",
     "url": "https://github.com/SadAways/Image-Gallery.git"
