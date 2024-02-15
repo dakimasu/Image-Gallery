@@ -4,7 +4,7 @@
   "description": "",
   "main": "generateHTML.js",
   "scripts": {
-    "generate-html": "node generateHTML.js"
+    "generate-html": "node /javascript/generateHTML.js"
   },
   "keywords": [],
   "author": "",

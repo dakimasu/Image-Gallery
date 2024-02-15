@@ -24,7 +24,7 @@ fs.readdir(imagesDirectory, (err, files) => {
     <div id="gallery">
 ${imageFiles.map((file, index) => `        <img src="${imagesDirectory}/${file}" alt="${file}">`).join('\n')}
     </div>
-    <script src="/test.js"></script>
+    <script src="/javascript/click.js"></script>
 </body>
 </html>
 `.trim(); // Trim any leading or trailing whitespace
