@@ -1,14 +1,18 @@
 {
   "name": "image-gallery",
   "version": "1.0.0",
-  "description": "",
-  "main": "generateHTML.js",
+  "description": "A simple static, html and css, image gallery!",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SadAways/Image-Gallery.git"
+  },
+  "main": "/javascript/generateHTML.js",
   "scripts": {
     "generate-html": "node /javascript/generateHTML.js"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "SadAways",
+  "license": "MIT",
   "dependencies": {
     "fs": "0.0.1-security"
   }
