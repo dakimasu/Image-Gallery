@@ -3,13 +3,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     images.forEach((image) => {
         image.addEventListener('click', function () {
-            // Assuming the image has a unique filename
+
             const imageName = image.getAttribute('src').split('/').pop();
 
-            // Construct the new URL
-            const newURL = window.location.origin + '/images/' + imageName;
+            const currentURL = window.location.href.replace(/\/index\.html$/, '');
 
-            // Navigate to the new URL
+            const newURL = currentURL + '/images/' + imageName;
+
             window.location.href = newURL;
         });
     });

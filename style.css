@@ -17,8 +17,8 @@ body {
     gap: 10px;
     width: 100%;
     margin: 0 auto;
-    height: 100vh; /* Set the container to take up the full viewport height */
-    overflow-y: auto; /* Enable vertical scrolling if needed */
+    height: 100vh;
+    overflow-y: auto;
 }
 
 img {

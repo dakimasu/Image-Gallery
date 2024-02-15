@@ -27,7 +27,7 @@ ${imageFiles.map((file, index) => `        <img src="${imagesDirectory}/${file}"
     <script src="click.js"></script>
 </body>
 </html>
-`.trim(); // Trim any leading or trailing whitespace
+`.trim();
 
     fs.writeFile(outputFilePath, htmlContent, err => {
         if (err) {
