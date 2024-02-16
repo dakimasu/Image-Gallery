@@ -1,4 +1,4 @@
-// const readline = require('readline');
+const readline = require('readline');
 // const axios = require('axios');
 const fs = require('fs');
 // const FormData = require('form-data');
@@ -15,24 +15,69 @@ const outputFilePath = './index.html';
 
 const allowedImageExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg'];
 
-generateRegular();
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
 
-// const rl = readline.createInterface({
-//     input: process.stdin,
-//     output: process.stdout
-// });
+rl.question('Do you want password functionality? (yes/no): ', (answer) => {
+    if (answer.toLowerCase() === 'yes') {
+        generateRegularPassword();
+        rl.close();
+    } else {
+        generateRegularPasswordless();
+        rl.close();
+    }
+});
 
-// rl.question('Are you using Cloudflare Images? (yes/no): ', (answer) => {
-//     if (answer.toLowerCase() === 'yes') {
-//         generateCloudflare();
-//         rl.close();
-//     } else {
-//         generateRegular();
-//         rl.close();
-//     }
-// });
+function generateRegularPassword() {
 
-function generateRegular() {
+    fs.readdir(imageFolderPath, (_, files) => {
+
+        const imageFiles = files.filter(file => allowedImageExtensions.includes(path.extname(file).toLowerCase()));
+
+        const htmlContent = generateHtmlContent(imageFiles);
+
+        fs.writeFile(outputFilePath, htmlContent, err => {
+            if (err) {
+                console.error('Error writing to index.html:', err);
+            } else {
+                console.log('index.html generated successfully.');
+            }
+        });
+    });
+
+    function generateHtmlContent(imageFiles) {
+        return `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="css/password-style.css">
+            <title>Image Gallery</title>
+        </head>
+        <body>
+            <script src="javascript/password.js"></script>
+            <div id="password-overlay">
+                <div id="password-box">
+                    <label for="password">Enter Password:</label>
+                    <input type="password" id="password" name="password">
+                    <button onclick="checkPassword()">Submit</button>
+                </div>
+            </div>
+        
+            <div id="gallery" style="display: none;">
+${imageFiles.map((file, index) => `              <img src="/images/${file}" alt="${file}">`).join('\n')}
+            </div>
+            <script src="javascript/click.js"></script>
+        </body>
+        </html>        
+    `.trim();
+    }
+}
+
+function generateRegularPasswordless() {
 
     fs.readdir(imageFolderPath, (_, files) => {
 
@@ -56,14 +101,14 @@ function generateRegular() {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="css/passwordless-style.css">
         <title>Image Gallery</title>
     </head>
     <body>
         <div id="gallery">
 ${imageFiles.map((file, index) => `         <img src="/images/${file}" alt="${file}">`).join('\n')}
         </div>
-        <script src="click.js"></script>
+        <script src="javascript/click.js"></script>
     </body>
     </html>
     `.trim();
