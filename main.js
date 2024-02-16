@@ -66,13 +66,12 @@ function generateRegularPassword() {
                     <button onclick="checkPassword()">Submit</button>
                 </div>
             </div>
-        
             <div id="gallery" style="display: none;">
 ${imageFiles.map((file, index) => `              <img src="/images/${file}" alt="${file}">`).join('\n')}
             </div>
             <script src="javascript/click.js"></script>
         </body>
-        </html>        
+        </html>
     `.trim();
     }
 }
@@ -96,21 +95,21 @@ function generateRegularPasswordless() {
 
     function generateHtmlContent(imageFiles) {
         return `
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="css/passwordless-style.css">
-        <title>Image Gallery</title>
-    </head>
-    <body>
-        <div id="gallery">
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="css/passwordless-style.css">
+            <title>Image Gallery</title>
+        </head>
+        <body>
+            <div id="gallery">
 ${imageFiles.map((file, index) => `         <img src="/images/${file}" alt="${file}">`).join('\n')}
-        </div>
-        <script src="javascript/click.js"></script>
-    </body>
-    </html>
+            </div>
+            <script src="javascript/click.js"></script>
+        </body>
+        </html>
     `.trim();
     }
 }
