@@ -1,21 +1,22 @@
+Import-Module "scripts\EnvModule\EnvModule.psm1"
+
+$envVariables = Get-EnvVariables -envFilePath ".env"
+
 # Set your API token here
-$apiToken = "your_api_token_here"
+$apiToken = $envVariables["API_TOKEN"]
 
 # Set your Cloudflare account ID
-$accountId = "your_account_id_here"
+$accountId = $envVariables["ACCOUNT_ID"]
 
 # Set the path to the file containing image_ids (one per line)
-$imageIdsFilePath = "./out.txt"
+$imageIdsFilePath = $envVariables["IMAGES_TXT"]
 
 # Read image_ids from the file
 $imageIds = Get-Content -Path $imageIdsFilePath
 
-# Cloudflare API endpoint
-$urlBase = "https://api.cloudflare.com/client/v4/accounts/$accountId/images/v1/"
-
 # Loop through each image_id and send DELETE request
 foreach ($imageId in $imageIds) {
-    $url = "$urlBase$imageId"
+    $url = $envVariables["DELETE_IMAGE_URL"] -replace "accountId", $accountId -replace "imageId", $imageId
 
     # Create headers
     $headers = @{

@@ -1,14 +1,18 @@
-# Set your Cloudflare API token
-$apiToken = "your_api_token_here"
+Import-Module "scripts\EnvModule\EnvModule.psm1"
+
+$envVariables = Get-EnvVariables -envFilePath ".env"
+
+# Set your API token here
+$apiToken = $envVariables["API_TOKEN"]
 
 # Set your Cloudflare account ID
-$accountId = "your_account_id_here"
+$accountId = $envVariables["ACCOUNT_ID"]
 
 # Specify the output directory
-$outputDirectory = "."
+$outputDirectory = $envVariables["IMAGES_TXT"]
 
 # Set the API endpoint URL
-$url = "https://api.cloudflare.com/client/v4/accounts/$accountId/images/v2"
+$url = $envVariables["LIST_IMAGE_URL"] -replace "accountId", $accountId
 
 # Define headers
 $headers = @{
@@ -22,15 +26,15 @@ $response = Invoke-RestMethod -Uri $url -Method Get -Headers $headers
 # Check if the request was successful
 if ($response.success) {
     # Create or clear the image_ds.txt file
-    $null | Out-File -FilePath "$outputDirectory\out.txt" -Force
+    $null | Out-File -FilePath "$outputDirectory" -Force
 
     # Loop through each image and write the id to image_ds.txt
     foreach ($image in $response.result.images) {
         $imageId = $image.id
-        $imageId | Out-File -Append -FilePath "$outputDirectory\out.txt" -Encoding UTF8
+        $imageId | Out-File -Append -FilePath "$outputDirectory" -Encoding UTF8
     }
 
-    Write-Host "Image IDs have been written to out.txt"
+    Write-Host "Image IDs have been written to /files/images.txt"
 } else {
     Write-Host "Error: $($response.errors[0].message)"
 }

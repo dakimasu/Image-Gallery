@@ -1,14 +1,18 @@
-# Set your Cloudflare API token
-$apiToken = "your_api_token_here"
+Import-Module "scripts\EnvModule\EnvModule.psm1"
+
+$envVariables = Get-EnvVariables -envFilePath ".env"
+
+# Set your API token here
+$apiToken = $envVariables["API_TOKEN"]
 
 # Set your Cloudflare account ID
-$accountId = "your_account_id_here"
+$accountId = $envVariables["ACCOUNT_ID"]
 
 # Specify the output directory
-$outputDirectory = "."
+$outputDirectory = $envVariables["IMAGES_TXT"]
 
 # Set the API endpoint URL with query parameters
-$url = "https://api.cloudflare.com/client/v4/accounts/$accountId/images/v2?per_page=10000"
+$url = $envVariables["LIST_IMAGE_URL"] -replace "accountId", $accountId
 
 # Define headers
 $headers = @{
@@ -32,7 +36,7 @@ if ($response.success) {
         foreach ($variant in $variants) {
             $totalVariantCount++
             $imgTag = "<img src=`"$variant`" alt=`"$totalVariantCount`">"
-            $imgTag | Out-File -Append -FilePath "$outputDirectory\out.txt" -Encoding UTF8
+            $imgTag | Out-File -Append -FilePath "$outputDirectory" -Encoding UTF8
         }
     }
 
