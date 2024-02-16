@@ -22,15 +22,15 @@ $response = Invoke-RestMethod -Uri $url -Method Get -Headers $headers
 # Check if the request was successful
 if ($response.success) {
     # Create or clear the image_ds.txt file
-    $null | Out-File -FilePath "$outputDirectory\image_ids.txt" -Force
+    $null | Out-File -FilePath "$outputDirectory\out.txt" -Force
 
     # Loop through each image and write the id to image_ds.txt
     foreach ($image in $response.result.images) {
         $imageId = $image.id
-        $imageId | Out-File -Append -FilePath "$outputDirectory\image_ids.txt" -Encoding UTF8
+        $imageId | Out-File -Append -FilePath "$outputDirectory\out.txt" -Encoding UTF8
     }
 
-    Write-Host "Image IDs have been written to image_ids.txt"
+    Write-Host "Image IDs have been written to out.txt"
 } else {
     Write-Host "Error: $($response.errors[0].message)"
 }

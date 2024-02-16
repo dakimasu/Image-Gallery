@@ -7,8 +7,8 @@ $accountId = "your_account_id_here"
 # Specify the output directory
 $outputDirectory = "."
 
-# Set the API endpoint URL
-$url = "https://api.cloudflare.com/client/v4/accounts/$accountId/images/v2"
+# Set the API endpoint URL with query parameters
+$url = "https://api.cloudflare.com/client/v4/accounts/$accountId/images/v2?per_page=10000"
 
 # Define headers
 $headers = @{

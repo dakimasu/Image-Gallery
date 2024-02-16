@@ -5,7 +5,7 @@ $apiToken = "your_api_token_here"
 $accountId = "your_account_id_here"
 
 # Set the path to the file containing image_ids (one per line)
-$imageIdsFilePath = "./image_ids.txt"
+$imageIdsFilePath = "./out.txt"
 
 # Read image_ids from the file
 $imageIds = Get-Content -Path $imageIdsFilePath
